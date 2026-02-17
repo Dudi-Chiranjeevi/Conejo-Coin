@@ -52,17 +52,3 @@ jobs:
       - name: Build Frontend app
         working-directory: collectibles-inventory
         run: npm run build
-
-      # -----------------------------
-      # Create PR to dev
-      # -----------------------------
-      - name: Create Pull Request to Dev
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: dev
-          branch: ${{ github.ref_name }}
-          title: "Auto PR: ${{ github.ref_name }} → dev"
-          body: |
-            CI Passed ✅
-            Auto-generated PR from feature branch.
