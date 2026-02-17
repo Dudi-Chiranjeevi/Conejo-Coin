@@ -52,18 +52,3 @@ jobs:
       - name: Build Frontend app
         working-directory: collectibles-inventory
         run: npm run build
-
-            # -----------------------------
-      # Create PR to dev (Auto)
-      # -----------------------------
-      - name: Create Pull Request to Dev
-        run: |
-          gh pr create \
-            --base dev \
-            --head ${{ github.ref_name }} \
-            --title "Auto PR: ${{ github.ref_name }} → dev" \
-            --body "CI Passed ✅ Auto-generated PR." \
-          || echo "PR already exists"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
