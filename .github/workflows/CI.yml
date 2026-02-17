@@ -53,16 +53,17 @@ jobs:
         working-directory: collectibles-inventory
         run: npm run build
 
-      # -----------------------------
-      # Create PR to dev
+            # -----------------------------
+      # Create PR to dev (Auto)
       # -----------------------------
       - name: Create Pull Request to Dev
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: dev
-          branch: ${{ github.ref_name }}
-          title: "Auto PR: ${{ github.ref_name }} → dev"
-          body: |
-            CI Passed ✅
-            Auto-generated PR from feature branch.
+        run: |
+          gh pr create \
+            --base dev \
+            --head ${{ github.ref_name }} \
+            --title "Auto PR: ${{ github.ref_name }} → dev" \
+            --body "CI Passed ✅ Auto-generated PR." \
+          || echo "PR already exists"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
