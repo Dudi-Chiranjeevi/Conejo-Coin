@@ -1,6 +1,6 @@
 # 🐍 Conejo Coin Inventory Management Backend
 
-Complete Django REST API implementation for managing high-value collectibles inventory with PostgreSQL, multi-tenant support, and comprehensive validation
+Complete Django REST API implementation for managing high-value collectibles inventory with PostgreSQL, multi-tenant support, and comprehensive validation.
 
 ## 🚀 Quick Start
 
