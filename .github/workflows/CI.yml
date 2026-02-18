@@ -53,18 +53,14 @@ jobs:
         working-directory: collectibles-inventory
         run: npm run build
 
-      # -----------------------------
-      # Create PR to dev branch
-      # -----------------------------
       - name: Create Pull Request to Dev
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore: auto PR from ${{ github.ref_name }} to dev"
-          branch: dev
-          base: dev
+          branch: ${{ github.ref_name }}           # current feature branch
+          base: dev                                # target branch
           title: "Auto PR: ${{ github.ref_name }} → dev"
           body: |
             This PR was automatically created by the CI workflow.
-          # Avoid duplicate PRs
-          update-existing: true
+          branch-suffix: auto-pr                   # ensures uniqueness if a PR already exists
