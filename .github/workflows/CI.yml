@@ -52,3 +52,14 @@ jobs:
       - name: Build Frontend app
         working-directory: collectibles-inventory
         run: npm run build
+
+      - name: Create Pull Request to Dev
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: auto PR from ${{ github.ref_name }} to dev"
+          branch: "${{ github.ref_name }}-auto-pr"   # new temporary branch
+          base: dev
+          title: "Auto PR: ${{ github.ref_name }} → dev"
+          body: |
+            This PR was automatically created by the CI workflow.
